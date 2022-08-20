@@ -3,4 +3,9 @@
   padding: 0;
   border: 0;
   font-family: "Roboto", sans-serif;
+  box-sizing: border-box;
+}
+.main-container {
+  max-width: 1024px;
+  margin: 0 auto;
 }
