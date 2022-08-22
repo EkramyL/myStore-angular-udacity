@@ -27,4 +27,6 @@ export class ProductItemDetailComponent implements OnInit {
     const id = Number(routeParams.get('id'));
     this.product = this.productService.getProduct(id);
   }
+
+  addToCart() {}
 }
