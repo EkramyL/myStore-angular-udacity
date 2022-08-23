@@ -11,7 +11,7 @@
       [defaultValue]="1"
       [(ngModel)]="productQuantity"
     />
-    <button class="btn-cart" (click)="addToCart()">Add to cart</button>
+    <button class="btn-cart" (click)="addToCart(product)">Add to cart</button>
 
     <a class="back-link" routerLink="/">&#x2190; Back to product list</a>
     <h3>{{ productQuantity }}</h3>

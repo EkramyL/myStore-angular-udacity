@@ -1,9 +1,15 @@
 <div class="product-container">
-  <div class="product-image" [routerLink]="['/products', product?.id]">
-    <img src="{{ product?.url }}" alt="" />
+  <div class="product-image" [routerLink]="['/products', product.id]">
+    <img src="{{ product.url }}" alt="" />
   </div>
-  <p>{{ product?.name }}</p>
-  <p>{{ product?.price | currency }}</p>
-  <input class="select-input" type="number" min="1" [defaultValue]="1" />
-  <button class="btn-cart">Add to cart</button>
+  <p>{{ product.name }}</p>
+  <p>{{ product.price | currency }}</p>
+  <input
+    class="select-input"
+    type="number"
+    min="1"
+    [defaultValue]="1"
+    [(ngModel)]="productQuantity"
+  />
+  <button class="btn-cart" (click)="addToCart(product)">Add to cart</button>
 </div>

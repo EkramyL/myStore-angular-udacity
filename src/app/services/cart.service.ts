@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { find } from 'rxjs';
 import { CartItem } from '../model/cart-item';
 
 @Injectable({
@@ -12,7 +13,14 @@ export class CartService {
   }
 
   addCartItem(cartItem: CartItem): CartItem[] {
-    this.cartItems.push(cartItem);
+    let i = this.cartItems.findIndex(
+      (item) => item.productId === cartItem.productId
+    );
+    if (i === -1) {
+      this.cartItems.push(cartItem);
+    } else {
+      this.cartItems[i].quantity += cartItem.quantity;
+    }
     return this.cartItems;
   }
 }
