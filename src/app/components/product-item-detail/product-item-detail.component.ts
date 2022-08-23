@@ -16,7 +16,7 @@ export class ProductItemDetailComponent implements OnInit {
     url: '',
     description: '',
   };
-
+  productQuantity: number = 1;
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService

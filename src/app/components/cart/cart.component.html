@@ -1,66 +1,29 @@
-<!-- <div class="no-items">
+<div *ngIf="cartItems.length === 0" class="empty-cart-message">
   <p>Your Cart is empty go add some products...</p>
-</div> -->
-<div class="page-container">
+</div>
+<div *ngIf="cartItems.length > 0" class="page-container">
   <div class="cart-container">
-    <div class="cart-item">
-      <img
-        src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-        alt="book"
-      />
+    <div class="cart-item" *ngFor="let cartItem of cartItems">
+      <img src="{{ cartItem.image }}" alt="{{ cartItem.name }}" />
       <div class="cart-item-details">
-        <h3>Book</h3>
-        <p>9.99</p>
+        <h3>{{ cartItem.name }}</h3>
+        <p>{{ cartItem.price | currency }}</p>
         <p>
           Amount:
           <input
             class="number-input"
             type="number"
             min="1"
-            [defaultValue]="1"
+            [defaultValue]="cartItem.quantity"
+            [(ngModel)]="cartItem.quantity"
+            (change)="getTotalPrice()"
           />
         </p>
+        <h3>{{ cartItem.quantity }}</h3>
       </div>
     </div>
-    <div class="cart-item">
-      <img
-        src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-        alt="book"
-      />
-      <div class="cart-item-details">
-        <h3>Book</h3>
-        <p>9.99</p>
-        <p>
-          Amount:
-          <input
-            class="number-input"
-            type="number"
-            min="1"
-            [defaultValue]="1"
-          />
-        </p>
-      </div>
-    </div>
-    <div class="cart-item">
-      <img
-        src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-        alt="book"
-      />
-      <div class="cart-item-details">
-        <h3>Book</h3>
-        <p>9.99</p>
-        <p>
-          Amount:
-          <input
-            class="number-input"
-            type="number"
-            min="1"
-            [defaultValue]="1"
-          />
-        </p>
-      </div>
-    </div>
-    <h2>Total: $1099.99</h2>
+
+    <h2>Total: {{ totalPrice.toFixed(2) | currency }}</h2>
   </div>
   <div class="cart-panel">
     <form action="submit">
