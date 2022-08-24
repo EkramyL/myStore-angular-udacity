@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CartItem } from 'src/app/model/cart-item';
 import { CartService } from 'src/app/services/cart.service';
 
@@ -9,26 +10,12 @@ import { CartService } from 'src/app/services/cart.service';
 })
 export class CartComponent implements OnInit {
   totalPrice: number = 0;
-  cartItems: CartItem[] = [
-    // {
-    //   productId: 2,
-    //   name: 'headphone',
-    //   image:
-    //     'https://images.unsplash.com/photo-1583394838336-acd977736f90?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-    //   price: 99.9,
-    //   quantity: 3,
-    // },
-    // {
-    //   productId: 3,
-    //   name: 'backpack',
-    //   image:
-    //     'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
-    //   price: 69.9,
-    //   quantity: 2,
-    // },
-  ];
+  cartItems: CartItem[] = [];
+  fullName: string = '';
+  address: string = '';
+  creditCardNumber: string = '';
 
-  constructor(private cartService: CartService) {
+  constructor(private cartService: CartService, private router: Router) {
     this.totalPrice = this.getTotalPrice();
   }
 
@@ -39,8 +26,21 @@ export class CartComponent implements OnInit {
   getTotalPrice() {
     this.totalPrice = 0;
     this.cartItems.map((item) => {
+      if (item.quantity === 0) {
+        this.removeFromCart(item);
+      }
       this.totalPrice += item.price * item.quantity;
     });
     return this.totalPrice;
+  }
+  removeFromCart(theItem: CartItem) {
+    this.cartService.removeCartItem(theItem);
+    this.cartItems = this.cartService.getCartItems();
+    this.getTotalPrice();
+    alert(`${theItem.name} is going to be removed`);
+  }
+  onSubmit(name: string, price: number) {
+    this.cartService.setCartInfo(name, price);
+    this.router.navigate(['confirmation']);
   }
 }

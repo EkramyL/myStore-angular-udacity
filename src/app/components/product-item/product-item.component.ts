@@ -36,5 +36,6 @@ export class ProductItemComponent implements OnInit {
       price: product.price,
     };
     this.cartService.addCartItem(this.cartItem);
+    alert(`${this.product.name} is added to your cart`);
   }
 }
