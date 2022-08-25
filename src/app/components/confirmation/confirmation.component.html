@@ -1,1 +1,13 @@
-<p>confirmation works!</p>
+<div class="confirmation-container">
+  <div class="confirmation-item">
+    <div class="confirmation-items">
+      <div class="confirmation-header">
+        <h2>Success</h2>
+      </div>
+      <p>Thank you, {{ cartDetail.name }}</p>
+      <p>your {{ cartDetail.totalPrice | currency }} order is confirmed</p>
+      <p>please allow for 1-3 business day(s) for shipping</p>
+      <button class="btn-back" routerLink="/">Back to product list</button>
+    </div>
+  </div>
+</div>
