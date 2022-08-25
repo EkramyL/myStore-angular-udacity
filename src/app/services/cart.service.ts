@@ -55,8 +55,4 @@ export class CartService {
   getCartInfo() {
     return this.cartDetail;
   }
-
-  getCartCount(): number {
-    return this.cartItems.length;
-  }
 }
