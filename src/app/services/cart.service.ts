@@ -34,6 +34,7 @@ export class CartService {
 
   resetCartItems(): CartItem[] {
     this.cartItems = [];
+    this.cartCount.next(this.cartItems);
     return this.cartItems;
   }
 
@@ -43,6 +44,7 @@ export class CartService {
     let i = this.cartItems.findIndex((p) => p.productId === cartItem.productId);
     if (i !== -1) {
       this.cartItems.splice(i, 1);
+      this.cartCount.next(this.cartItems);
     }
     return this.cartItems;
   }
