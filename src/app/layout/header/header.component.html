@@ -2,5 +2,10 @@
   <h1>MyStore</h1>
   <a routerLink="/"> Product List</a>
   <span class="devider">|</span>
-  <a routerLink="/cart"> Cart </a>
+  <a routerLink="/cart">
+    Cart
+    <span class="cartNumber" *ngIf="cartCount !== 0">
+      {{ cartCount }}
+    </span></a
+  >
 </div>

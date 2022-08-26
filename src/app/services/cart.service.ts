@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { find } from 'rxjs';
+import { BehaviorSubject, find } from 'rxjs';
 import { CartItem } from '../model/cart-item';
 
 @Injectable({
@@ -12,6 +12,8 @@ export class CartService {
     totalPrice: 0,
   };
 
+  cartCount = new BehaviorSubject<CartItem[]>([]);
+
   constructor() {}
   getCartItems(): CartItem[] {
     return this.cartItems;
@@ -23,6 +25,7 @@ export class CartService {
     );
     if (i === -1) {
       this.cartItems.push(cartItem);
+      this.cartCount.next(this.cartItems);
     } else {
       this.cartItems[i].quantity += cartItem.quantity;
     }
